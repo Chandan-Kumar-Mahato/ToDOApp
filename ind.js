@@ -5,7 +5,7 @@ const textField = document.getElementById('textColl');
 var taskStore = [];
 buttonClicked.addEventListener("click",()=>{
     addTask();
-    
+    addToLocalStorage();
 })
 
 // lets make a global array;
@@ -48,7 +48,10 @@ function addTask() {
         // this is the function so that i can deletet the task
        crossButton.addEventListener("click",()=>{
         taskStore.splice(taskStore.indexOf(taskElement.textContent),1);
+        localStorage.removeItem("task",taskElement.taskContent);
+        // console.log(taskElement.textContent);
         taskContainer.remove();
+        localStorage.setItem("task",JSON.stringify(taskStore));
         console.log(taskStore);
         console.log("Task Removed");
        })
@@ -66,4 +69,8 @@ function addTask() {
     {
         alert('Task box cannot be empty.');
     }
+}
+function addToLocalStorage()
+{
+    localStorage.setItem("task",JSON.stringify(taskStore));
 }
